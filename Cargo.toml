@@ -1,0 +1,21 @@
+[package]
+name = "selog"
+version = "0.1.0"
+description = "Simple, Easy LOGger logs to StdErr."
+authors = ["watcol <kantaa058@gmail.com>"]
+homepage = "https://github.com/watcol/selog"
+repository = "https://github.com/watcol/selog"
+keywards = ["log", "logger", "loglevel"]
+categories = ["development-tools::debugging"]
+license = "MIT"
+readme = "README.md"
+edition = "2018"
+
+include = [
+  "README.md",
+  "Cargo.toml",
+  "src/**/*.rs"
+]
+
+[dependencies]
+log = "0.4"
