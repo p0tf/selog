@@ -5,7 +5,9 @@ use log::{set_boxed_logger, set_max_level, LevelFilter, Log, Metadata, Record, S
 
 /// The SELog struct.
 #[derive(Clone)]
-pub struct SELog;
+pub struct SELog {
+    level: LevelFilter,
+}
 
 impl Log for SELog {
     fn enabled(&self, _metadata: &Metadata<'_>) -> bool {
@@ -26,12 +28,19 @@ impl Log for SELog {
 impl SELog {
     /// Create new SELog.
     pub fn new() -> Self {
-        SELog
+        SELog {
+            level: LevelFilter::Warn,
+        }
+    }
+
+    pub fn level(mut self, level: LevelFilter) -> Self {
+        self.level = level;
+        self
     }
 
     /// Set logger as active.
     pub fn init(&self) -> Result<(), SetLoggerError> {
-        set_max_level(LevelFilter::max());
+        set_max_level(self.level);
         set_boxed_logger(Box::new(self.clone()))
     }
 }
