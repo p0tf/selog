@@ -1,1 +1,2 @@
-# Simple, Easy LOGger logs to StdErr.
+# SELog
+Simple, Easy LOGger logs to StdErr.
