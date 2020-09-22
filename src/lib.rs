@@ -1,6 +1,14 @@
 //! Simple, Easy LOGger logs to StdErr.
 extern crate log;
 
+#[cfg(test)]
+mod tests;
+
+pub mod level;
+
+// Re-exports
+pub use level::SELevel;
+
 use log::{set_boxed_logger, set_max_level, LevelFilter, Log, Metadata, Record, SetLoggerError};
 
 /// The SELog struct.
@@ -33,8 +41,12 @@ impl SELog {
         }
     }
 
-    pub fn level(mut self, level: LevelFilter) -> Self {
-        self.level = level;
+    // Set loglevel.
+    pub fn level<T>(mut self, level: T) -> Self
+    where
+        T: Into<LevelFilter>,
+    {
+        self.level = level.into();
         self
     }
 
