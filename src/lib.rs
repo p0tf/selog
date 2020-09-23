@@ -26,8 +26,11 @@ pub struct SELog {
 }
 
 impl Log for SELog {
-    fn enabled(&self, _metadata: &Metadata<'_>) -> bool {
-        true
+    fn enabled(&self, metadata: &Metadata<'_>) -> bool {
+        match self.level.to_level() {
+            Some(level) => metadata.level() <= level,
+            None => false,
+        }
     }
 
     fn log(&self, record: &Record<'_>) {
@@ -40,7 +43,10 @@ impl Log for SELog {
         )
     }
 
-    fn flush(&self) {}
+    fn flush(&self) {
+        use std::io::{stderr, Write};
+        stderr().flush().ok();
+    }
 }
 
 impl SELog {
