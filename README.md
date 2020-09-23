@@ -2,6 +2,6 @@
 Simple, Easy LOGger logs to StdErr.
 
 ## License
-SELog is licensed under [The MIT License](https://opensource.org/licenses/MIT).
+SELog is licensed under the MIT license.
 
-More details, see the [LICENSE](https://github.com/watcol/selog/blob/main/LICENSE).
+See [LICENSE](https://github.com/watcol/selog/blob/main/LICENSE) for details.
