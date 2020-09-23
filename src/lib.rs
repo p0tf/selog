@@ -1,20 +1,28 @@
 //! Simple, Easy LOGger logs to StdErr.
+extern crate ansi_term;
 extern crate log;
 
 #[cfg(test)]
 mod tests;
 
+pub mod color;
 pub mod level;
 
 // Re-exports
+pub use ansi_term::Colour as Color;
+pub use color::{Colorize, SEPallet};
 pub use level::SELevel;
 
-use log::{set_boxed_logger, set_max_level, LevelFilter, Log, Metadata, Record, SetLoggerError};
+use ansi_term::Style;
+use log::{
+    set_boxed_logger, set_max_level, Level, LevelFilter, Log, Metadata, Record, SetLoggerError,
+};
 
 /// The SELog struct.
 #[derive(Clone)]
 pub struct SELog {
     level: LevelFilter,
+    pallet: Option<SEPallet>,
 }
 
 impl Log for SELog {
@@ -23,9 +31,11 @@ impl Log for SELog {
     }
 
     fn log(&self, record: &Record<'_>) {
+        let level = record.level();
+
         eprintln!(
             "{}: {}",
-            record.level().to_string().to_lowercase(),
+            self.style(level).paint(level.to_string().to_lowercase()),
             record.args()
         )
     }
@@ -38,6 +48,7 @@ impl SELog {
     pub fn new() -> Self {
         SELog {
             level: LevelFilter::Warn,
+            pallet: SEPallet::new().auto(),
         }
     }
 
@@ -48,6 +59,33 @@ impl SELog {
     {
         self.level = level.into();
         self
+    }
+
+    /// Set `Colorize`.
+    pub fn colorize(mut self, colorize: Colorize) -> Self {
+        self.pallet = match colorize {
+            Colorize::On => Some(self.pallet.unwrap_or(SEPallet::new())),
+            Colorize::Off => None,
+            Colorize::Auto => self.pallet.unwrap_or(SEPallet::new()).auto(),
+        };
+        self
+    }
+
+    /// Set color pallet.
+    pub fn color(mut self, pallet: SEPallet) -> Self {
+        self.pallet = match self.pallet {
+            Some(_) => Some(pallet),
+            None => None,
+        };
+        self
+    }
+
+    /// Create `Style` from `SELog` and `log::Level`.
+    pub fn style(&self, level: Level) -> Style {
+        match self.pallet {
+            Some(p) => p.style(level).bold(),
+            None => Style::new(),
+        }
     }
 
     /// Set logger as active.
