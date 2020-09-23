@@ -13,10 +13,10 @@ use log::LevelFilter;
 /// | false |   false |      true |    true |       `Trace` |
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct SELevel {
-    off: bool,
-    quiet: bool,
-    verbose: bool,
-    debug: bool,
+    pub off: bool,
+    pub quiet: bool,
+    pub verbose: bool,
+    pub debug: bool,
 }
 
 impl Default for SELevel {
