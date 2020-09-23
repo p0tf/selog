@@ -24,3 +24,6 @@ atty = "0.2"
 [dependencies.log]
 version = "0.4"
 features = ["std"]
+
+[dev-dependencies]
+clap = "2.33"

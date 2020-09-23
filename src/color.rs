@@ -1,3 +1,4 @@
+//! Utilities to colorize outputs.
 extern crate ansi_term;
 extern crate atty;
 extern crate log;
@@ -22,9 +23,9 @@ pub struct SEPallet {
 /// The enum to express whether outputs are colorized.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum Colorize {
-    On,
-    Auto,
     Off,
+    Auto,
+    On,
 }
 
 impl FromStr for Colorize {
@@ -32,9 +33,9 @@ impl FromStr for Colorize {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "on" => Ok(Colorize::On),
-            "auto" => Ok(Colorize::Auto),
             "off" => Ok(Colorize::Off),
+            "auto" => Ok(Colorize::Auto),
+            "on" => Ok(Colorize::On),
             s => Err(format!("{} is invalid.", s)),
         }
     }
