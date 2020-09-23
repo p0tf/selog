@@ -18,11 +18,31 @@ use log::{
     set_boxed_logger, set_max_level, Level, LevelFilter, Log, Metadata, Record, SetLoggerError,
 };
 
+use std::fmt;
+
 /// The SELog struct.
-#[derive(Clone)]
+#[derive(Clone, Copy, PartialEq)]
 pub struct SELog {
     level: LevelFilter,
     pallet: Option<SEPallet>,
+}
+
+impl Default for SELog {
+    fn default() -> Self {
+        SELog {
+            level: LevelFilter::Warn,
+            pallet: SEPallet::new().auto(),
+        }
+    }
+}
+
+impl fmt::Debug for SELog {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        f.debug_struct("SELog")
+            .field("level", &self.level)
+            .field("pallet", &self.pallet)
+            .finish()
+    }
 }
 
 impl Log for SELog {
@@ -52,10 +72,7 @@ impl Log for SELog {
 impl SELog {
     /// Create new SELog.
     pub fn new() -> Self {
-        SELog {
-            level: LevelFilter::Warn,
-            pallet: SEPallet::new().auto(),
-        }
+        Self::default()
     }
 
     // Set loglevel.
