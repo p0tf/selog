@@ -73,6 +73,39 @@
 //!     // ...
 //! }
 //! ```
+//!
+//! with `opts` feature:
+//!
+//! ```rust
+//! #[macro_use]
+//! extern crate log;
+//! #[macro_use]
+//! extern crate selog;
+//!
+//! use selog::{Colorize, SELevel, SELog};
+//!
+//! opts! {
+//!     struct Opts {
+//!         #[clap(short, long, about = "More verbose output.")]
+//!         verbose: bool,
+//!         #[clap(short, long, about = "Less output.")]
+//!         quiet: bool,
+//!         #[clap(short, long, about = "Output debug log.")]
+//!         debug: bool,
+//!         #[clap(long, about = "Silence all output.")]
+//!         no_output: bool,
+//!         #[clap(long, about = "Control color of output.",
+//!                possible_values = &["off", "auto", "on"],
+//!                default_value = "auto")]
+//!         color: Colorize,
+//!     }
+//! }
+//!
+//! fn main() {
+//!     // Same as above...
+//! }
+//!
+//! ```
 extern crate ansi_term;
 extern crate log;
 
