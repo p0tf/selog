@@ -111,6 +111,9 @@ pub mod level;
 #[cfg(feature = "opts")]
 pub mod opts;
 
+#[cfg(feature = "colorchoice")]
+pub mod colorchoice;
+
 // Re-exports
 pub use ansi_term::Colour as Color;
 pub use color::{Colorize, SEPallet};
