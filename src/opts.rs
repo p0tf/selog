@@ -14,6 +14,7 @@ macro_rules! opts {
         }
     ) => {
         use clap::Clap;
+        use selog::opts::SEOpts;
 
         $(#[$attr])*
         #[derive(Clap)]
@@ -32,6 +33,24 @@ macro_rules! opts {
                    default_value = "auto")]
             color: selog::Colorize,
             $($(#[$fattr])* $fpub $field: $type),*
+        }
+
+        impl SEOpts for $name {
+            fn verbose(&self) -> bool {
+                self.verbose
+            }
+
+            fn quiet(&self) -> bool {
+                self.quiet
+            }
+
+            fn debug(&self) -> bool {
+                self.debug
+            }
+
+            fn color(&self) -> selog::Colorize {
+                self.color
+            }
         }
     };
 }

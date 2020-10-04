@@ -91,16 +91,7 @@
 //! fn main() {
 //!     let opts = Opts::parse();
 //!
-//!     SELog::new()
-//!         .level(
-//!             SELevel::new()
-//!                 .verbose(opts.verbose)
-//!                 .quiet(opts.quiet)
-//!                 .debug(opts.debug),
-//!         )
-//!         .colorize(opts.color)
-//!         .init()
-//!         .unwrap();
+//!     opts.init_log().unwrap();
 //!
 //!     error!("Failed something.");
 //!
