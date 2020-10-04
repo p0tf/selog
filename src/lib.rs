@@ -26,45 +26,47 @@
 //! ```
 //!
 //! ## Using `clap`
-//! Tested on `clap 2.33.3`
+//! Tested on `clap 3.0.0-beta.2`
 //!
 //! ```rust
 //! #[macro_use]
 //! extern crate log;
-//! #[macro_use]
 //! extern crate clap;
 //! extern crate selog;
 //!
-//! use clap::Arg;
+//! use clap::Clap;
 //! use selog::{Colorize, SELevel, SELog};
-//! use std::str::FromStr;
+//!
+//! #[derive(Clap)]
+//! struct Opts {
+//!     #[clap(short, long, about = "More verbose output.")]
+//!     verbose: bool,
+//!     #[clap(short, long, about = "Less output.")]
+//!     quiet: bool,
+//!     #[clap(short, long, about = "Output debug log.")]
+//!     debug: bool,
+//!     #[clap(long, about = "Silence all output.")]
+//!     no_output: bool,
+//!     #[clap(long, about = "Control color of output.",
+//!            possible_values = &["off", "auto", "on"],
+//!            default_value = "auto")]
+//!     color: Colorize,
+//! }
 //!
 //! fn main() {
-//!     let m = app_from_crate!()
-//!         .args(&[
-//!             Arg::from_usage("-v --verbose 'More verbose output.'"),
-//!             Arg::from_usage("-d --debug 'Output debug log.'"),
-//!             Arg::from_usage("-q --quiet 'Less output.'"),
-//!             Arg::from_usage("--no-output 'Silence all output.'"),
-//!             Arg::from_usage("--color=[mode] 'Control color of output.'")
-//!                 .possible_values(&["off", "auto", "on"])
-//!                 .default_value("auto"),
-//!         ])
-//!         .get_matches();
+//!     let opts = Opts::parse();
 //!
 //!     SELog::new()
 //!         .level(
 //!             SELevel::new()
-//!                 .verbose(m.is_present("verbose"))
-//!                 .debug(m.is_present("debug"))
-//!                 .quiet(m.is_present("quiet"))
-//!                 .off(m.is_present("no-output")),
+//!                 .verbose(opts.verbose)
+//!                 .quiet(opts.quiet)
+//!                 .debug(opts.debug)
+//!                 .off(opts.no_output),
 //!         )
-//!         // As the string is validated in the definition, these `unwrap` are safe.
-//!         .colorize(Colorize::from_str(m.value_of("color").unwrap()).unwrap())
+//!         .colorize(opts.color)
 //!         .init()
 //!         .unwrap();
-//!
 //!
 //!     error!("Failed something.");
 //!

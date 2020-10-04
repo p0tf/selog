@@ -26,4 +26,4 @@ version = "0.4"
 features = ["std"]
 
 [dev-dependencies]
-clap = "2.33"
+clap = "3.0.0-beta"
