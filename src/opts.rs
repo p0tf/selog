@@ -10,7 +10,7 @@ macro_rules! opts {
     (
         $(#[$attr:meta])*
         $pub:vis struct $name:ident {
-        $($(#[$subattr:meta])* $fpub:vis $field:ident: $type:ty,)*
+        $($(#[$fattr:meta])* $fpub:vis $field:ident: $type:ty,)*
         }
     ) => {
         use clap::Clap;
@@ -21,7 +21,7 @@ macro_rules! opts {
                author = clap::crate_authors!(),
                about = clap::crate_description!())]
         $pub struct $name {
-            $($(#[$subattr])* $fpub $field: $type,)*
+            $($(#[$fattr])* $fpub $field: $type,)*
         }
     };
 }
