@@ -33,3 +33,6 @@ features = ["std"]
 
 [dev-dependencies]
 clap = "3.0.0-beta"
+
+[package.metadata.docs.rs]
+all-features = true
