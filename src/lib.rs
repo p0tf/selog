@@ -82,6 +82,9 @@ mod tests;
 pub mod color;
 pub mod level;
 
+#[cfg(feature = "opts")]
+pub mod opts;
+
 // Re-exports
 pub use ansi_term::Colour as Color;
 pub use color::{Colorize, SEPallet};
