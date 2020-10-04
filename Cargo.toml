@@ -1,6 +1,6 @@
 [package]
 name = "selog"
-version = "0.1.0"
+version = "0.1.1-beta.0"
 description = "Simple, Easy LOGger logs to StdErr."
 authors = ["watcol <kantaa058@gmail.com>"]
 homepage = "https://github.com/watcol/selog"
