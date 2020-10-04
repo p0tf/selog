@@ -10,7 +10,7 @@ macro_rules! opts {
     (
         $(#[$attr:meta])*
         $pub:vis struct $name:ident {
-        $($(#[$fattr:meta])* $fpub:vis $field:ident: $type:ty,)*
+        $($(#[$fattr:meta])* $fpub:vis $field:ident: $type:ty),*
         }
     ) => {
         use clap::Clap;
@@ -21,7 +21,17 @@ macro_rules! opts {
                author = clap::crate_authors!(),
                about = clap::crate_description!())]
         $pub struct $name {
-            $($(#[$fattr])* $fpub $field: $type,)*
+            #[clap(short, long, about = "More verbose output.")]
+            verbose: bool,
+            #[clap(short, long, about = "Less output.")]
+            quiet: bool,
+            #[clap(short, long, about = "Output debug log.")]
+            debug: bool,
+            #[clap(long, about = "Control color of output.",
+                   possible_values = &["off", "auto", "on"],
+                   default_value = "auto")]
+            color: selog::Colorize,
+            $($(#[$fattr])* $fpub $field: $type),*
         }
     };
 }

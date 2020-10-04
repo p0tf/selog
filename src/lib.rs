@@ -49,6 +49,7 @@
 //!            possible_values = &["off", "auto", "on"],
 //!            default_value = "auto")]
 //!     color: Colorize,
+//!     // Your options...
 //! }
 //!
 //! fn main() {
@@ -83,21 +84,27 @@
 //!
 //! opts! {
 //!     struct Opts {
-//!         #[clap(short, long, about = "More verbose output.")]
-//!         verbose: bool,
-//!         #[clap(short, long, about = "Less output.")]
-//!         quiet: bool,
-//!         #[clap(short, long, about = "Output debug log.")]
-//!         debug: bool,
-//!         #[clap(long, about = "Control color of output.",
-//!                possible_values = &["off", "auto", "on"],
-//!                default_value = "auto")]
-//!         color: Colorize,
+//!         // Your options...
 //!     }
 //! }
 //!
 //! fn main() {
-//!     // Same as above...
+//!     let opts = Opts::parse();
+//!
+//!     SELog::new()
+//!         .level(
+//!             SELevel::new()
+//!                 .verbose(opts.verbose)
+//!                 .quiet(opts.quiet)
+//!                 .debug(opts.debug),
+//!         )
+//!         .colorize(opts.color)
+//!         .init()
+//!         .unwrap();
+//!
+//!     error!("Failed something.");
+//!
+//!     // ...
 //! }
 //!
 //! ```
