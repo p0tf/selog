@@ -45,8 +45,6 @@
 //!     quiet: bool,
 //!     #[clap(short, long, about = "Output debug log.")]
 //!     debug: bool,
-//!     #[clap(long, about = "Silence all output.")]
-//!     no_output: bool,
 //!     #[clap(long, about = "Control color of output.",
 //!            possible_values = &["off", "auto", "on"],
 //!            default_value = "auto")]
@@ -61,8 +59,7 @@
 //!             SELevel::new()
 //!                 .verbose(opts.verbose)
 //!                 .quiet(opts.quiet)
-//!                 .debug(opts.debug)
-//!                 .off(opts.no_output),
+//!                 .debug(opts.debug),
 //!         )
 //!         .colorize(opts.color)
 //!         .init()
@@ -92,8 +89,6 @@
 //!         quiet: bool,
 //!         #[clap(short, long, about = "Output debug log.")]
 //!         debug: bool,
-//!         #[clap(long, about = "Silence all output.")]
-//!         no_output: bool,
 //!         #[clap(long, about = "Control color of output.",
 //!                possible_values = &["off", "auto", "on"],
 //!                default_value = "auto")]
