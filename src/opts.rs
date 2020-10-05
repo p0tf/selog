@@ -82,3 +82,23 @@ pub trait SEOpts {
             .init()
     }
 }
+
+impl SEOpts for clap::ArgMatches {
+    fn verbose(&self) -> bool {
+        self.is_present("verbose")
+    }
+
+    fn quiet(&self) -> bool {
+        self.is_present("quiet")
+    }
+
+    fn debug(&self) -> bool {
+        self.is_present("debug")
+    }
+
+    fn color(&self) -> Colorize {
+        use std::str::FromStr;
+
+        Colorize::from_str(self.value_of("color").unwrap()).unwrap()
+    }
+}
