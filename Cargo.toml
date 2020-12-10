@@ -1,6 +1,6 @@
 [package]
 name = "selog"
-version = "0.1.1-beta.1"
+version = "0.2.0"
 description = "Simple, Easy LOGger logs to StdErr."
 authors = ["watcol <kantaa058@gmail.com>"]
 homepage = "https://github.com/watcol/selog"
@@ -17,22 +17,9 @@ include = [
   "src/**/*.rs"
 ]
 
-[features]
-opts = ["clap"]
-colorchoice = ["termcolor"]
-
-[dependencies]
-ansi_term = "0.12"
-atty = "0.2"
-clap = { version = "3.0.0-beta", optional = true }
-termcolor = { version = "1.1", optional = true }
-
 [dependencies.log]
 version = "0.4"
 features = ["std"]
-
-[dev-dependencies]
-clap = "3.0.0-beta"
 
 [package.metadata.docs.rs]
 all-features = true
