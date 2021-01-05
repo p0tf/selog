@@ -2,9 +2,9 @@
 name = "selog"
 version = "0.2.0"
 description = "Simple, Easy LOGger logs to StdErr."
-authors = ["PotfMan <potfman@gmail.com>"]
-homepage = "https://github.com/potfman/selog"
-repository = "https://github.com/potfman/selog"
+authors = ["watcpl <potfman@gmail.com>"]
+homepage = "https://github.com/watcol/selog"
+repository = "https://github.com/watcol/selog"
 keywords = ["log", "logger", "loglevel"]
 categories = ["development-tools::debugging"]
 license = "MIT"
