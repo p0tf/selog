@@ -5,7 +5,7 @@
 [![Downloads (latest)](https://img.shields.io/crates/dv/selog)](https://crates.io/crates/selog)
 [![License](https://img.shields.io/crates/l/selog)](https://github.com/watcol/selog/blob/main/LICENSE)
 
-**S**imple, **E**asy **LOG**ger logs to **S**td**E**rr.
+**S**imple, **E**asy **LOG**ger.
 
 ## Documents
 API Documents are available on [docs.rs](https://docs.rs/selog).

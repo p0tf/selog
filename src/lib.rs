@@ -1,4 +1,4 @@
-//! Simple, Easy LOGger logs to StdErr.
+//! A Simple, Easy LOGger.
 //!
 //! > CAUTION: This crate is compatible with `log ^0.4.11`.
 //!
