@@ -8,14 +8,11 @@ extern crate log;
 
 use log::{
     Log, set_boxed_logger, SetLoggerError,
-    LevelFilter, set_max_level,
+    STATIC_MAX_LEVEL, set_max_level,
     Metadata, Record
 };
 
 /// The logger implementer.
-///
-/// ```
-/// ```
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct SELog;
 
@@ -27,7 +24,7 @@ impl SELog {
 
     /// Set this logger active.
     pub fn set(self) -> Result<(), SetLoggerError> {
-        set_max_level(LevelFilter::max());
+        set_max_level(STATIC_MAX_LEVEL);
         set_boxed_logger(Box::new(self))
     }
 }
